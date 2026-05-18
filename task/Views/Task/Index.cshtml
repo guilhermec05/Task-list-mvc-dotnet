@@ -1,0 +1,39 @@
+﻿@using task.Resources
+@model List<task.ViewModels.TaskListViewModel>
+
+@section Scripts{
+    <script src="~/Scripts/Pages/Tasks.js"></script>
+}
+<link href="~/Content/pages/Task.css"
+      rel="stylesheet" />
+
+<div class="task-body">
+
+    <div class="input-group d-flex align-content-center justify-content-center">
+        @Html.TextBox("search-task", null, new
+        {
+          @class = "form-control",
+          placeholder = TaskMessages.SearchTask,
+          aria_label = "Recipient's username",
+          aria_describedby = "button-addon2"
+      })
+        <button class="btn btn-primary"
+                type="button"
+                id="add-task"
+                data-bs-toggle="modal"
+                data-bs-target="#AddTaskModal">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>
+
+    @Html.Partial("_AddTask", new task.ViewModels.TaskViewModel())
+
+    <div class="card-task d-flex flex-wrap gap-4 m-5 overflow-scroll">
+        @foreach (var card in Model)
+        {
+            @Html.Partial("_CardTask", card)
+        }
+    </div>
+
+   
+</div>

@@ -1,0 +1,102 @@
+﻿@using task.Resources
+@using System.Security.Claims
+@using task.Resources
+
+@{ 
+    var identity = (ClaimsIdentity)User.Identity;
+
+    var userId = identity
+        .FindFirst(ClaimTypes.NameIdentifier)
+        ?.Value;
+}
+
+
+
+@model task.ViewModels.TaskViewModel
+
+<!-- Modal -->
+<div class="modal fade " id="AddTaskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">@TaskMessages.AddNewTask </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                { 
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(x => x.Id, new { id = "idTask" })
+                    @Html.Hidden("userId", userId)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-12 mb-6">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", id = "titleTasks" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-12 mb-3">
+                            @Html.TextAreaFor(
+                            x => x.Description,
+                            rows: 5,
+                            columns: 50,
+                            htmlAttributes: new
+                            {
+                                @class = "form-control",
+                                id = "desciptionTasks"
+                            })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-12 mb-3">
+                            @Html.EnumDropDownListFor(model => model.State, 
+                            "Selecione",
+                            new { @class = "form-select", id = "stateTasks" } 
+                           )
+                            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DueDate,
+
+
+                       htmlAttributes: new
+                            {
+                           @class = "control-label col-md-5"
+
+
+                       })
+                        <div class="col-md-12 mb-3">
+                            @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control", type = "datetime-local", id = "dueDateTasks" } })
+                            @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                </div>
+                }
+
+
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-x"></i>
+                    @TaskMessages.Close
+                </button>
+                <button type="button" id="SaveTask" class="btn btn-primary">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    @TaskMessages.Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+﻿@model task.ViewModels.SignUpViewModel
+
+@using task.Resources
+
+<link href="/Content/pages/SingUp.css"
+      rel="stylesheet" />
+
+@using (Html.BeginForm("SignUpUser", "Login",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <h4>@Message.SignTitle</h4>
+    <hr />
+    <div class="form-horizontal d-flex flex-column justify-content-center SignUp-User">
+
+        <div class="w-100 ">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5 mb-3">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+
+
+

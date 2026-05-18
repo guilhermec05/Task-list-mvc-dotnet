@@ -1,0 +1,13 @@
+﻿.menu-task-app {
+    background: #27D3F5
+}
+
+.menu-task-app nav .user,
+.menu-task-app nav .logo {
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.Signin{
+    width: 30vw
+}

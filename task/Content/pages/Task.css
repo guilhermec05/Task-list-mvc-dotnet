@@ -1,0 +1,12 @@
+﻿
+.task-body {
+    margin-top: 1rem;
+}
+
+#search-task {
+    max-width: 50vw !important ;
+  
+}
+.card-task{
+    height:400px
+}
