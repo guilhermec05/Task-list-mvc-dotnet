@@ -31,7 +31,7 @@ namespace task.ViewModels
            ResourceType = typeof(TaskMessages),
            Name = nameof(TaskMessages.DueDate)
            )]
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
 
 
         [Display(

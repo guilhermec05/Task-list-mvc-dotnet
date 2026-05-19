@@ -27,7 +27,7 @@
     <div class="card-body">
         <h5 class="card-title">@Model.Title</h5>
         <p class="card-text text-truncate">@Model.Description</p>
-        <button href="#" class="btn btn-info" edit-id="@Model.Id">@TaskMessages.Edit</button>
-        <button href="#" class="btn btn-danger" deleted-i="@Model.Id">@TaskMessages.Delete</button>
-    </div>
+        <button class="btn btn-info btn-edit" edit-id="@Model.Id">@TaskMessages.Edit</button>
+        <button class="btn btn-danger btn-delete" deleted-id="@Model.Id">@TaskMessages.Delete</button>
+    </div> 
 </div>

@@ -51,13 +51,57 @@ namespace task.Controllers
         {
             Tasks task = _mapper.Map<Tasks>(taskView);
 
-            await _taskService.Add(task);
+            if (taskView.Id == 0)
+            {
+                await _taskService.Add(task);
+
+            }
+            else
+            {
+                await _taskService.Update(task);
+            }
+
+
+
+            return Json(new {
+                success = true,
+                message = "Adicionado com sucesso"
+            });
+
+          
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(int taskId)
+        {
+
+            var task = await _taskService.GetTaskById(taskId);
+
+            var taskViewModel = _mapper.Map<TaskViewModel>(task);
 
             return Json(new
             {
                 success = true,
-                message = "cadastrado com sucesso"
-            });
-        } 
+                data = taskViewModel
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [HttpGet]
+        public async Task<ActionResult> Delete(int taskId)
+        {
+
+            await _taskService.Delete(taskId);
+
+
+            return Json(new
+            {
+                success = true,
+                data = "Removido com sucee"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

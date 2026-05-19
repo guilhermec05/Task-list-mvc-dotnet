@@ -9,6 +9,8 @@ namespace task.Repositories.Impl
 {
     public interface IUserRepository
     {
+
+
         Task<User> GetByEmail(string email);
 
         void Add(User user);

@@ -10,7 +10,7 @@ using task.Repositories.Impl;
 
 namespace task.Repositories
 {
-    public class TaskRepository : RepositoryBase ,ITaskRepository
+    public class TaskRepository : RepositoryBase, ITaskRepository
     {
         public TaskRepository(AppDbContext context) : base(context)
         {
@@ -21,9 +21,19 @@ namespace task.Repositories
            _context.Tasks.Add(tasks);
         }
 
+        public async Task<Tasks> GetTaskById(int taskId)
+        {
+            return await _context.Tasks.FirstOrDefaultAsync(x => x.Id == taskId);
+        }
+
         public async  Task<List<Tasks>> GetTaskListByUserId(int user_id)
         {
             return await _context.Tasks.Where(x => x.UserId == user_id).ToListAsync();
+        }
+
+        public async Task Remove(Tasks tasks)
+        {
+            _context.Tasks.Remove(tasks);
         }
     }
 }

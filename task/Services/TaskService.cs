@@ -23,9 +23,46 @@ namespace task.Services
             return true;   
         }
 
+        public async Task Delete(int id)
+        {
+            Tasks task1 = await _unitOfWork.Task.GetTaskById(id);
+
+            if (task1 == null)
+            {
+                throw new Exception(
+            "Task não encontrada");
+            }
+
+            await _unitOfWork.Task.Remove(task1);
+
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async  Task<Tasks> GetTaskById(int tasksId)
+        {
+            return await _unitOfWork.Task.GetTaskById(tasksId);
+        }
+
         public async Task<List<Tasks>> GetTaskListByUserId(int user_id)
         {
             return await _unitOfWork.Task.GetTaskListByUserId(user_id);
+        }
+
+        public async Task Update(Tasks task)
+        {
+            Tasks task1 = await _unitOfWork.Task.GetTaskById(task.Id);
+
+            if(task1 == null){
+                throw new Exception(
+            "Task não encontrada");
+            }
+
+            task1.State = task.State;
+            task1.Title = task.Title;
+            task1.Description = task.Description;
+            task1.DueDate = task.DueDate;
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }

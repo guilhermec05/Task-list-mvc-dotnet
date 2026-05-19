@@ -10,8 +10,11 @@ namespace task.Repositories.Impl
     public interface ITaskRepository
     {
 
+        Task<Tasks> GetTaskById(int taskId);
 
         Task<List<Tasks>> GetTaskListByUserId(int user_id);
         void Add(Tasks task);
+
+        Task Remove(Tasks tasks);
     }
 }
