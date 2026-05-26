@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Web;
-using task.Models;
+using task.Domain.Models;
 
 namespace task.DataBase.Tables
 {
     public class TaskMap : EntityTypeConfiguration<Tasks>
     {
 
-        public TaskMap() {
+        public TaskMap()
+        {
             ToTable("public.tasks");
 
             HasKey(x => x.Id);

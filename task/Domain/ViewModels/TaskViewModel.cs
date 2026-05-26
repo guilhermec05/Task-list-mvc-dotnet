@@ -1,11 +1,9 @@
 ﻿using System;
-using task.Resources;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using task.Models.enums;
+using task.Domain.Models.enums;
+using task.Resources;
 
-namespace task.ViewModels
+namespace task.Domain.ViewModels
 {
     public class TaskViewModel
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using task.Context;
 using task.Repositories;
 using task.Repositories.Impl;
@@ -28,9 +24,9 @@ namespace task.Configuration
             var container = new UnityContainer();
 
             container.RegisterInstance(mapper);
-            container.RegisterType<IUnityOfWork,UnitOfWork>();
+            container.RegisterType<IUnityOfWork, UnitOfWork>();
 
-           
+
 
             // REPOSITORY
             container.RegisterType<IUserRepository, UserRepository>();
@@ -47,5 +43,5 @@ namespace task.Configuration
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
-    }    
+    }
 }

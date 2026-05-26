@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
+using task.Domain.Models;
+using task.Domain.ViewModels;
 using task.Helpers.Security;
-using task.Models;
-using task.Services;
 using task.Services.Impl;
-using task.ViewModels;
 
 namespace task.Controllers
 {
@@ -30,17 +26,7 @@ namespace task.Controllers
         // GET: Task
         public async Task<ActionResult> Index()
         {
-            var identity = (ClaimsIdentity)User.Identity;
-
-            var userId = identity
-                .FindFirst(ClaimTypes.NameIdentifier)
-                ?.Value;
-
-
-            var taskList = await _taskService.GetTaskListByUserId(int.Parse(userId));
-
-            List<TaskListViewModel> taskViewModel = _mapper.Map<List<TaskListViewModel>>(taskList);
-
+            var taskViewModel = await GetListTaskByUser();
 
             return View(taskViewModel);
         }
@@ -63,12 +49,13 @@ namespace task.Controllers
 
 
 
-            return Json(new {
+            return Json(new
+            {
                 success = true,
                 message = "Adicionado com sucesso"
             });
 
-          
+
         }
 
         [HttpGet]
@@ -98,8 +85,53 @@ namespace task.Controllers
             return Json(new
             {
                 success = true,
-                data = "Removido com sucee"
+                data = "Removido com sucesso"
             }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> SearchTask(string search)
+        {
+
+            if (search == string.Empty)
+            {
+                var taskViewModelByUser = await GetListTaskByUser();
+
+                return Json(new
+                {
+                    success = false,
+                    data = taskViewModelByUser
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            var tasks = await _taskService.GetTaskListByName(search);
+
+            var taskViewModel = _mapper.Map<List<TaskListViewModel>>(tasks);
+
+            return Json(
+                new
+                {
+                    success = true,
+                    data = taskViewModel,
+                }, JsonRequestBehavior.AllowGet);
+        }
+
+        private async Task<List<TaskListViewModel>> GetListTaskByUser()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+
+            var userId = identity
+                .FindFirst(ClaimTypes.NameIdentifier)
+                ?.Value;
+
+
+            var taskList = await _taskService.GetTaskListByUserId(int.Parse(userId));
+
+            List<TaskListViewModel> taskViewModel = _mapper.Map<List<TaskListViewModel>>(taskList);
+
+            return taskViewModel;
+
         }
 
 

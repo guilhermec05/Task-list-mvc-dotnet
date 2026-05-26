@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using task.Models;
+﻿using System.Threading.Tasks;
+using task.Domain.Models;
 
 namespace task.Repositories.Impl
 {
@@ -11,8 +7,12 @@ namespace task.Repositories.Impl
     {
 
 
+        Task<User> Get(int id);
+
         Task<User> GetByEmail(string email);
 
         void Add(User user);
+
+        Task Update(User user);
     }
 }

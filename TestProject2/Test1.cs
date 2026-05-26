@@ -1,7 +1,6 @@
 ﻿using Moq;
+using task.Domain.Models;
 using task.Repositories.Impl;
-using task.Repositories;
-using task.Models;
 using task.Services;
 
 namespace TestProject2
@@ -26,26 +25,26 @@ namespace TestProject2
                 });
 
 
-         
 
-            var  MockUnitOfWork = new Mock<IUnityOfWork>();
+
+            var MockUnitOfWork = new Mock<IUnityOfWork>();
 
             MockUnitOfWork
                 .Setup(x => x.Users)
                 .Returns(MockUserRepository.Object);
 
-           var Service = new UserServices(MockUnitOfWork.Object);
+            var Service = new UserServices(MockUnitOfWork.Object);
 
-           var user1= await Service.GetUserByEmail("Test@test.com");
+            var user1 = await Service.GetUserByEmail("Test@test.com");
 
             MockUnitOfWork.Verify(
-             
+
                 x => x.Users.GetByEmail("Test@test.com"),
                 Times.Once
             );
 
 
-            Assert.AreEqual( "Test@test.com", user1.Email) ;
+            Assert.AreEqual("Test@test.com", user1.Email);
 
 
             Assert.AreNotEqual("Test1@test.com", user1.Email);
@@ -70,7 +69,7 @@ namespace TestProject2
                 .Setup(x => x.Users)
                 .Returns(MockUserRepository2.Object);
 
-            var service2= new UserServices(MockUnitOfWork2.Object);
+            var service2 = new UserServices(MockUnitOfWork2.Object);
 
 
             var user = await service2.GetUserByEmail("Test2@test.com");

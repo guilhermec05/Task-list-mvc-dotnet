@@ -1,17 +1,14 @@
 ﻿using AutoMapper;
-using Resources;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using task.Models;
+using task.Domain.Models;
+using task.Domain.ViewModels;
 using task.Resources;
 using task.Services.Impl;
-using task.ViewModels;
 
 namespace task.Controllers
 {
@@ -24,7 +21,7 @@ namespace task.Controllers
         private readonly IMapper _mapper;
 
 
-        public LoginController(IAuthService authService, IUserServices userServices, IMapper mapper )
+        public LoginController(IAuthService authService, IUserServices userServices, IMapper mapper)
         {
             _authService = authService;
             _userServices = userServices;
@@ -41,7 +38,8 @@ namespace task.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel login) {
+        public async Task<ActionResult> Login(LoginViewModel login)
+        {
 
             try
             {
@@ -61,7 +59,8 @@ namespace task.Controllers
                 }
 
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
 
                 TempData["ErrorMessage"] = ex.Message;
             }
@@ -79,11 +78,11 @@ namespace task.Controllers
         public async Task<ActionResult> SignUpUser(SignUpViewModel signUp)
         {
 
-           User user = _mapper.Map<User>(signUp);
+            User user = _mapper.Map<User>(signUp);
 
             await _userServices.CreateUser(user);
 
-           return RedirectToAction("Index"); 
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

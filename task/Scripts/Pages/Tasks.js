@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
 
-       
+    let timeout;
+
+    console.log(resources);
+
 
     $("#add-task").click(function () {
         $("#idTask").val("")
@@ -12,6 +15,7 @@
 
         $("#stateTasks").prop("selectedIndex", 0);
     })
+
 
     $("#SaveTask").click(function () {
         const token = $('input[name="__RequestVerificationToken"]').val()
@@ -61,69 +65,153 @@
         });
     })
 
-    $('.btn-edit').click(function () {
-        const id = $(this).attr('edit-id')
+   events() 
 
-        $.ajax({
-            url: `/Task/Edit`,
-            type: "GET",
-            data: {
-                taskId : id
-            },
-            success: function (response) {
-                const data = response.data
+    $('#search-task').on('input', function () {
+        clearTimeout(timeout);
 
-                const myModal = new bootstrap.Modal('#AddTaskModal', {
-                    keyboard: false
-                })
+        let value = $(this).val();
 
-                myModal.show()
+        timeout = setTimeout(function () {
 
+                $.ajax({
+                    url: `/Task/SearchTask`,
+                    type: "GET",
+                    data: {
+                        search: value
+                    },
+                    success: function (response) {
 
-                $("#idTask").val(data.Id)
+                        const { data } = response
 
+                      
 
-                $("#titleTasks").val(data.Title)
+                        $('.card-task').html("")
 
-                $("#desciptionTasks").val(data.Description)
-                console.log(data)
+                        setListCards(data)
 
-                if (data.DueDate) {
-                    $("#dueDateTasks").val(parseMvcDate(data.DueDate))
-
-                } else {
-                    $("#dueDateTasks").val("")
-                }
-
-                $("#stateTasks").prop("selectedIndex", data.State);
-
+                        events()
+                    }
+                });
             }
-        })
+
+            , 500);
 
     })
 
-    $('.btn-delete').click(function () {
-        const id = $(this).attr('deleted-id')
 
-        $.ajax({
-            url: `/Task/Delete`,
-            type: "GET",
-            data: {
-                taskId: id
-            },
-            success: function (response) {
+    function events() {
 
-                location.reload();
-            },
 
-            error: function (error) {
+        $('.btn-edit').click(function () {
+            const id = $(this).attr('edit-id')
 
-                alert(error)
+            $.ajax({
+                url: `/Task/Edit`,
+                type: "GET",
+                data: {
+                    taskId: id
+                },
+                success: function (response) {
+                    const data = response.data
 
-            }
+                    const myModal = new bootstrap.Modal('#AddTaskModal', {
+                        keyboard: false
+                    })
+
+                    myModal.show()
+
+
+                    $("#idTask").val(data.Id)
+
+
+                    $("#titleTasks").val(data.Title)
+
+                    $("#desciptionTasks").val(data.Description)
+                    console.log(data)
+
+                    if (data.DueDate) {
+                        $("#dueDateTasks").val(parseMvcDate(data.DueDate))
+
+                    } else {
+                        $("#dueDateTasks").val("")
+                    }
+
+                    $("#stateTasks").prop("selectedIndex", data.State);
+
+                }
+            })
+
         })
-    });
 
+        $('.btn-delete').click(function () {
+            const id = $(this).attr('deleted-id')
+
+            $.ajax({
+                url: `/Task/Delete`,
+                type: "GET",
+                data: {
+                    taskId: id
+                },
+                success: function (response) {
+
+                    location.reload();
+                },
+
+                error: function (error) {
+
+                    alert(error)
+
+                }
+            })
+        });
+    }
+
+    function setListCards(listCard) {
+
+
+        const stateText = {
+            1: "Pending",
+            2: "InProgress",
+            3: "Finished",
+            4: "Cancelled"
+        }
+
+        const stateView = {
+            1: "text-bg-warning",
+            2: "text-bg-primary",
+            3: "text-bg-success",
+            4: "text-bg-secondary"
+        }
+
+        
+
+        const cardTask = $('.card-task')
+
+        listCard.forEach((x) => {
+            const classe = $('.card').first().clone()
+            classe.removeClass('d-none')
+            classe.find(".card-title").text(x.Title)
+            classe.find(".card-text").text(x.Description)
+            classe.find(".btn-edit").attr("edit-id", x.Id)
+            classe.find(".btn-delete").attr("deleted-id", x.Id)
+
+            classe.find('.badge').removeClass().addClass(`badge ${stateView[x.State]} badge-title`)
+            classe.find('.badge-title').html(resources[stateText[x.State]]);
+            
+
+
+            if (x.IsExpired) {
+                classe.find('.icon').removeClass('d-none')
+            }
+
+
+            cardTask.append(classe)
+        })
+
+
+
+    }
 
     function parseMvcDate(value) {
 
@@ -145,4 +233,5 @@
             String(date.getMinutes())
                 .padStart(2, '0');
     }
+
 })

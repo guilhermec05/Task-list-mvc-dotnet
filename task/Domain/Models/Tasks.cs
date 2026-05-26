@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.DynamicData;
-using task.Models.enums;
+using task.Domain.Models.enums;
 
-namespace task.Models
+namespace task.Domain.Models
 {
     [TableName("tasks")]
     public class Tasks
@@ -16,7 +13,7 @@ namespace task.Models
 
         public string Description { get; set; }
 
-        public DateTime? DueDate {  get; set; }
+        public DateTime? DueDate { get; set; }
 
         public StateTask State { get; set; } = StateTask.Pending;
 

@@ -1,11 +1,7 @@
 ﻿namespace task.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
     using task.DataBase.Seeders;
-    using task.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<task.Context.AppDbContext>
     {

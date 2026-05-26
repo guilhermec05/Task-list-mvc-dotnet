@@ -1,12 +1,7 @@
-﻿using Resources;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 using task.Resources;
 
-namespace task.ViewModels
+namespace task.Domain.ViewModels
 {
     public class SignUpViewModel
     {

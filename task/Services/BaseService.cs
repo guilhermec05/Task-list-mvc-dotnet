@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using task.Repositories.Impl;
+﻿using task.Repositories.Impl;
 
 namespace task.Services
 {
-   
+
     public abstract class BaseService
     {
         protected readonly IUnityOfWork _unitOfWork;

@@ -1,8 +1,7 @@
-﻿using Resources;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using task.Resources;
 
-namespace task.ViewModels
+namespace task.Domain.ViewModels
 {
     public class LoginViewModel
     {

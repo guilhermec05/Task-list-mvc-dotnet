@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using task.Models;
+using task.Domain.Models;
 
 namespace task.Repositories.Impl
 {
@@ -13,6 +10,8 @@ namespace task.Repositories.Impl
         Task<Tasks> GetTaskById(int taskId);
 
         Task<List<Tasks>> GetTaskListByUserId(int user_id);
+
+        Task<List<Tasks>> GetTaskListByName(string search);
         void Add(Tasks task);
 
         Task Remove(Tasks tasks);

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using task.Context;
 using task.Util;
 
@@ -17,12 +14,12 @@ namespace task.DataBase.Seeders
             }
 
             context.Users.Add(
-                new Models.User
+                new Domain.Models.User
                 {
                     Name = "Test",
                     Email = "teste@email.com",
                     Password = PasswordHandler.Hash("12345678")
-                    
+
                 }
                 );
 

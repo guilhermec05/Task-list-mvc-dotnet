@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using task.Context;
-using task.Models;
+using task.Domain.Models;
 using task.Repositories.Impl;
+using task.Util;
 
 namespace task.Repositories
 {
@@ -23,9 +21,33 @@ namespace task.Repositories
 
         }
 
+        public async Task<User> Get(int id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
+
         public async Task<User> GetByEmail(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+        }
+
+        public async Task Update(User user)
+        {
+            var userModel = await Get(user.Id);
+
+            if (userModel == null) { 
+                throw new Exception("User not found");
+            }
+
+            userModel.Name = user.Name;
+            userModel.Email = user.Email;
+
+            if (user.Password != null && user.Password != string.Empty)
+            {
+                userModel.Password = PasswordHandler.Hash(user.Password);
+            }
+
+
         }
     }
 }

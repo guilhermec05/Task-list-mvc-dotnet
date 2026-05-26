@@ -1,19 +1,23 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using task.Models;
-using task.ViewModels;
+using task.Domain.Models;
+using task.Domain.ViewModels;
 
 namespace task.Mappers
 {
     public class UserProfiler : Profile
     {
-        public UserProfiler() {
+        public UserProfiler()
+        {
             CreateMap<User, SignUpViewModel>();
 
-            CreateMap<SignUpViewModel,User >();
+            CreateMap<SignUpViewModel, User>();
+
+            CreateMap<User, UserViewModel>();
+
+
+            CreateMap<UserViewModel, User>();
+
+            
 
         }
     }

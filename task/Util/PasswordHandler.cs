@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace task.Util
+﻿namespace task.Util
 {
     public static class PasswordHandler
     {
         public static string Hash(string password)
         {
-            
+
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
 

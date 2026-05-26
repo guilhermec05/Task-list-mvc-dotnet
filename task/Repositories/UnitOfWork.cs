@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using task.Context;
 using task.Repositories.Impl;
 
@@ -10,7 +9,7 @@ namespace task.Repositories
 
         private readonly AppDbContext _context;
 
-        public  IUserRepository Users { get; }
+        public IUserRepository Users { get; }
 
         public ITaskRepository Task { get; }
 
@@ -18,7 +17,8 @@ namespace task.Repositories
              AppDbContext context,
             IUserRepository userRepository,
             ITaskRepository taskRepository
-         ) {
+         )
+        {
             _context = context;
             Users = userRepository;
             Task = taskRepository;

@@ -2,7 +2,7 @@
 
 namespace task.Repositories
 {
-    public abstract class  RepositoryBase
+    public abstract class RepositoryBase
     {
         protected readonly AppDbContext _context;
 

@@ -1,25 +1,54 @@
-﻿@model task.ViewModels.TaskListViewModel
+﻿@model task.Domain.ViewModels.TaskListViewModel
 @using task.Resources
-@using task.Models.enums
+@using task.Domain.Models.enums
 
-@{ 
-    Dictionary<StateTask,string> map = new Dictionary<StateTask, string>();
+
+<script>
+
+    const resources =
+        @Html.Raw(
+            Json.Encode(new
+            {
+                Pending = TaskMessages.Pending,
+                Cancelled = TaskMessages.Cancelled,
+                Finished = TaskMessages.Fineshed,
+                InProgress = TaskMessages.InProgress,
+
+            }));
+
+   
+
+</script>
+
+@{
+    Dictionary<StateTask, string> map = new Dictionary<StateTask, string>();
 
 
     map.Add(StateTask.InProgress, "text-bg-primary");
     map.Add(StateTask.Cancelled, "text-bg-secondary");
     map.Add(StateTask.Finished, "text-bg-success");
     map.Add(StateTask.Pending, "text-bg-warning");
+
+    string hidden = "";
+
+    if(Model.Id == null)
+    {
+        hidden = "d-none";
+    }
+
+
+   
+
 }
 
 
 
-<div class="card" style="width: 30rem;">
-    <div class="card-header d-flex justify-content-between" >
-        <span class="badge  @map[Model.State]">@Model.State</span>
-        @if (Model.IsExpired)
+<div class="card @hidden" style="width: 30rem; height: 12rem ">
+    <div class="card-header d-flex justify-content-between">
+        <span class="badge  @map[Model.State] badge-title">@Model.StatusDisplay</span>
+        @if (Model.IsExpired || hidden != string.Empty)
         {
-            <i class="fas fa-hourglass-end"></i>
+            <i class="fas fa-hourglass-end icon @hidden"></i>
         }
 
 
@@ -27,7 +56,7 @@
     <div class="card-body">
         <h5 class="card-title">@Model.Title</h5>
         <p class="card-text text-truncate">@Model.Description</p>
-        <button class="btn btn-info btn-edit" edit-id="@Model.Id">@TaskMessages.Edit</button>
-        <button class="btn btn-danger btn-delete" deleted-id="@Model.Id">@TaskMessages.Delete</button>
-    </div> 
+        <button class="btn btn-info btn-edit" edit-id="@Model.Id"><i class="fa-solid fa-file-pen"></i>@TaskMessages.Edit</button>
+        <button class="btn btn-danger btn-delete" deleted-id="@Model.Id"><i class="fa-solid fa-trash"></i>@TaskMessages.Delete</button>
+    </div>
 </div>

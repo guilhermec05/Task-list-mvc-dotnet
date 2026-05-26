@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
-using task.Models;
+using task.Domain.Models;
 using task.Repositories.Impl;
 using task.Services.Impl;
 
@@ -20,7 +21,7 @@ namespace task.Services
 
             await _unitOfWork.CommitAsync();
 
-            return true;   
+            return true;
         }
 
         public async Task Delete(int id)
@@ -38,9 +39,16 @@ namespace task.Services
             await _unitOfWork.CommitAsync();
         }
 
-        public async  Task<Tasks> GetTaskById(int tasksId)
+        public async Task<Tasks> GetTaskById(int tasksId)
         {
             return await _unitOfWork.Task.GetTaskById(tasksId);
+        }
+
+        public async  Task<List<Tasks>> GetTaskListByName(string search)
+        {
+
+
+            return await _unitOfWork.Task.GetTaskListByName(search);
         }
 
         public async Task<List<Tasks>> GetTaskListByUserId(int user_id)
@@ -52,7 +60,8 @@ namespace task.Services
         {
             Tasks task1 = await _unitOfWork.Task.GetTaskById(task.Id);
 
-            if(task1 == null){
+            if (task1 == null)
+            {
                 throw new Exception(
             "Task não encontrada");
             }

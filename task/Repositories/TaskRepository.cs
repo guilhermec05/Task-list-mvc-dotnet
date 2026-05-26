@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using task.Context;
-using task.Models;
+using task.Domain.Models;
 using task.Repositories.Impl;
 
 namespace task.Repositories
@@ -18,7 +16,7 @@ namespace task.Repositories
 
         public void Add(Tasks tasks)
         {
-           _context.Tasks.Add(tasks);
+            _context.Tasks.Add(tasks);
         }
 
         public async Task<Tasks> GetTaskById(int taskId)
@@ -26,7 +24,13 @@ namespace task.Repositories
             return await _context.Tasks.FirstOrDefaultAsync(x => x.Id == taskId);
         }
 
-        public async  Task<List<Tasks>> GetTaskListByUserId(int user_id)
+        public async Task<List<Tasks>> GetTaskListByName(string search)
+        {
+            return await _context.Tasks.Where(x => x.Description.Contains(search)
+            || x.Title.Contains(search)).ToListAsync();
+        }
+
+        public async Task<List<Tasks>> GetTaskListByUserId(int user_id)
         {
             return await _context.Tasks.Where(x => x.UserId == user_id).ToListAsync();
         }

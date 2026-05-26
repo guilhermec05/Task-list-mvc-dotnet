@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using task.DataBase.Tables;
-using task.Models;
+using task.Domain.Models;
 
 namespace task.Context
 {

@@ -1,5 +1,5 @@
 ﻿@using task.Resources
-@model List<task.ViewModels.TaskListViewModel>
+@model List<task.Domain.ViewModels.TaskListViewModel>
 
 @section Scripts{
     <script src="~/Scripts/Pages/Tasks.js"></script>
@@ -26,7 +26,10 @@
         </button>
     </div>
 
-    @Html.Partial("_AddTask", new task.ViewModels.TaskViewModel())
+    @Html.Partial("_AddTask", new task.Domain.ViewModels.TaskViewModel())
+
+
+    @Html.Partial("_CardTask", new task.Domain.ViewModels.TaskListViewModel())
 
     <div class="card-task d-flex flex-wrap gap-4 m-5 overflow-scroll">
         @foreach (var card in Model)
@@ -35,5 +38,5 @@
         }
     </div>
 
-   
+
 </div>

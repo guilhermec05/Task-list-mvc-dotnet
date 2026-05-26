@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using task.Models;
+﻿using System.Threading.Tasks;
+using task.Domain.Models;
 using task.Repositories.Impl;
 using task.Services.Impl;
 using task.Util;
 
 namespace task.Services
 {
-    public class UserServices : BaseService , IUserServices
+    public class UserServices : BaseService, IUserServices
     {
         public UserServices(IUnityOfWork unityOfWork) : base(unityOfWork)
         {
@@ -28,9 +24,21 @@ namespace task.Services
             return 1;
         }
 
-        public async  Task<User> GetUserByEmail(string email)
+        public async Task<User> GetUser(int id)
         {
-           return await _unitOfWork.Users.GetByEmail(email) ;
+            return await _unitOfWork.Users.Get(id);
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _unitOfWork.Users.GetByEmail(email);
+        }
+
+        public async Task Update(User user)
+        {
+            await _unitOfWork.Users.Update(user);
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }

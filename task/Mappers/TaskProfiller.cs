@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using task.Models;
-using task.ViewModels;
+using task.Domain.Models;
+using task.Domain.ViewModels;
+using task.Domain.Models.enums;
 
 namespace task.Mappers
 {
@@ -18,7 +16,9 @@ namespace task.Mappers
 
             CreateMap<Tasks, TaskListViewModel>().ForMember(
                 dest => dest.IsExpired,
-                opt => opt.MapFrom(src => src.DueDate.HasValue && src.DueDate < DateTime.Now)
+                opt => opt.MapFrom(src => src.DueDate.HasValue &&
+                (src.State != StateTask.Finished && src.State !=StateTask.Cancelled ) &&
+                 src.DueDate < DateTime.Now)
             );
 
 

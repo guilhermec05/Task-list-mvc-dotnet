@@ -1,10 +1,5 @@
-﻿using Microsoft.Owin.Security;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using task.Models;
+﻿using System.Threading.Tasks;
+using task.Domain.Models;
 using task.Repositories.Impl;
 using task.Services.Impl;
 using task.Util;
@@ -22,7 +17,7 @@ namespace task.Services
 
         public async Task<bool> Login(string email, string password)
         {
-            
+
             User user = await _unitOfWork.Users.GetByEmail(email);
 
             if (user != null && PasswordHandler.CheckPassword(password, user.Password))

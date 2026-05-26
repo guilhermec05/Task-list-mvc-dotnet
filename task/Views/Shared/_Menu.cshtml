@@ -5,7 +5,16 @@
 <div class="shadow-sm menu-task-app ">
     <nav class="nav justify-content-between p-4 container">
         <div class="logo">
-            <i class="fa-solid fa-list-check"></i>
+
+            @Html.ActionLink(
+            " ",
+           "Index",
+           "Task",
+           null,
+           new
+           {
+               @class = "fa-solid fa-list-check link-decoration-none"
+           })
         </div>
 
         <div class="dropdown">
@@ -18,22 +27,36 @@
                 </span>
             </div>
             <ul class="dropdown-menu">
-                <li>
-                    @Html.ActionLink(
-                       TaskMessages.Perfil,
-                       "",
-                       "",
-                       null,
-                       new { @class = "dropdown-item" })
+                <li class="d-flex">
+                    <div class="dropdown-item" >
+                        <i class="fa-solid fa-user"></i>
+                        @Html.ActionLink(
+                           TaskMessages.Perfil,
+                           "Index",
+                           "User",
+                           null,
+                           new
+                           {
+                               @class = "link-decoration-none"
+                           })
+                    </div>
+                  
 
                 </li>
                 <li>
-                    @Html.ActionLink(
-                   TaskMessages.Logoff,
-                    "Logout",
-                    "Login",
-                    null,
-                    new { @class = "dropdown-item" })
+                    <div class="dropdown-item">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        @Html.ActionLink(
+                       TaskMessages.Logoff,
+                        "Logout",
+                        "Login",
+                        null,
+                        new
+                        {
+                            @class = "link-decoration-none"
+                        })
+                    </div>
+                   
                 </li>
             </ul>
 
