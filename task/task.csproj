@@ -428,15 +428,15 @@
     <Compile Include="Configuration\AutoMapperConfig.cs" />
     <Compile Include="Configuration\DependecyConfiguration.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="DataBase\Seeders\UsersSeeds.cs" />
-    <Compile Include="DataBase\Tables\TaskMap.cs" />
-    <Compile Include="DataBase\Tables\UserMap.cs" />
+    <Compile Include="Infrastruct\Migration\Seeders\UsersSeeds.cs" />
+    <Compile Include="Infrastruct\Migration\Tables\TaskMap.cs" />
+    <Compile Include="Infrastruct\Migration\Tables\UserMap.cs" />
     <Compile Include="Controllers\TaskController.cs" />
-    <Compile Include="Context\AppDbContext.cs" />
+    <Compile Include="Infrastruct\Data\Context\AppDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Security\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Shared\Helpers\Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Mappers\UserProfiler.cs" />
     <Compile Include="Migrations\202605131740218_InitialCreate.cs" />
     <Compile Include="Migrations\202605131740218_InitialCreate.Designer.cs">
@@ -468,7 +468,7 @@
     <Compile Include="Services\Impl\IUserServices.cs" />
     <Compile Include="Services\TaskService.cs" />
     <Compile Include="Services\UserServices.cs" />
-    <Compile Include="Util\PasswordHandler.cs" />
+    <Compile Include="Shared\Util\PasswordHandler.cs" />
     <Compile Include="Domain\ViewModels\LoginViewModel.cs" />
     <Compile Include="Domain\ViewModels\SignUpViewModel.cs" />
     <Compile Include="Domain\ViewModels\TaskListViewModel.cs" />

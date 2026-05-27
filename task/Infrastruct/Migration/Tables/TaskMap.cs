@@ -2,7 +2,7 @@
 using System.Data.Entity.ModelConfiguration;
 using task.Domain.Models;
 
-namespace task.DataBase.Tables
+namespace task.Infrastruct.Migration.Tables
 {
     public class TaskMap : EntityTypeConfiguration<Tasks>
     {

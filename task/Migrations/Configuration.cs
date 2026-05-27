@@ -1,16 +1,17 @@
 ﻿namespace task.Migrations
 {
     using System.Data.Entity.Migrations;
-    using task.DataBase.Seeders;
+    using task.Infrastruct.Migration.Seeders;
+    using task.Infrastruct.Data.Context;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<task.Context.AppDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AppDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(task.Context.AppDbContext context)
+        protected override void Seed(AppDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

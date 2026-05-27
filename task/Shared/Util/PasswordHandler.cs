@@ -1,4 +1,4 @@
-﻿namespace task.Util
+﻿namespace task.Shared.Util
 {
     public static class PasswordHandler
     {

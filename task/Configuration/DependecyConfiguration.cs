@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using task.Context;
+using task.Infrastruct.Data.Context;
 using task.Repositories;
 using task.Repositories.Impl;
 using task.Services;
@@ -7,6 +7,7 @@ using task.Services.Impl;
 using Unity;
 using Unity.AspNet.Mvc;
 using Unity.Lifetime;
+
 
 namespace task.Configuration
 {

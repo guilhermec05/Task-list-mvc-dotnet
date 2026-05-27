@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using task.Context;
+using task.Infrastruct.Data.Context;
 using task.Repositories.Impl;
 
 namespace task.Repositories

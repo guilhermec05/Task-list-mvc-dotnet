@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using task.Context;
-using task.Util;
+using task.Infrastruct.Data.Context;
+using task.Shared.Util;
 
-namespace task.DataBase.Seeders
+namespace task.Infrastruct.Migration.Seeders
 {
     public static class UsersSeeds
     {

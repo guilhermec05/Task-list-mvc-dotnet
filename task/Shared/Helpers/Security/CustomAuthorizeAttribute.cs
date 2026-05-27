@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace task.Helpers.Security
+namespace task.Shared.Helpers.Security
 {
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
-using task.Context;
+using task.Infrastruct.Data.Context;
 using task.Domain.Models;
 using task.Repositories.Impl;
-using task.Util;
+using task.Shared.Util;
 
 namespace task.Repositories
 {

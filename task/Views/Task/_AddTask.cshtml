@@ -8,6 +8,9 @@
     var userId = identity
         .FindFirst(ClaimTypes.NameIdentifier)
         ?.Value;
+
+
+    var tomorow = DateTime.Today.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
 }
 
 
@@ -76,7 +79,13 @@
 
                        })
                         <div class="col-md-12 mb-3">
-                            @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control", type = "datetime-local", id = "dueDateTasks" } })
+                            @Html.EditorFor(model => model.DueDate,
+                           new { htmlAttributes = new {
+                               @class = "form-control",
+                               type = "datetime-local",
+                               id = "dueDateTasks" ,
+                               @min = tomorow
+                           } })
                             @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
                         </div>
                     </div>

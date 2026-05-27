@@ -1,4 +1,4 @@
-﻿using task.Context;
+﻿using task.Infrastruct.Data.Context;
 
 namespace task.Repositories
 {

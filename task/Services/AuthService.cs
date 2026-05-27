@@ -2,7 +2,7 @@
 using task.Domain.Models;
 using task.Repositories.Impl;
 using task.Services.Impl;
-using task.Util;
+using task.Shared.Util;
 
 namespace task.Services
 {

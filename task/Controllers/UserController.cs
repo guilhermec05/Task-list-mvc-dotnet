@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using task.Domain.Models;
 using task.Domain.ViewModels;
-using task.Helpers.Security;
+using task.Shared.Helpers.Security;
 using task.Services.Impl;
 
 namespace task.Controllers

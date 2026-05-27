@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
-using task.DataBase.Tables;
+using task.Infrastruct.Migration.Tables;
 using task.Domain.Models;
 
-namespace task.Context
+namespace task.Infrastruct.Data.Context
 {
     public class AppDbContext : DbContext
     {
